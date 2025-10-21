@@ -80,7 +80,7 @@ const mockPlans: Record<string, Plan[]> = {
       area: "350 م²",
       rooms: "4 غرف نوم، 3 حمامات",
       floors: "طابقان",
-      budget: "1,687,500 ر.س",
+      budget: "1,687,500 $",
       preview: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=600&fit=crop"
     },
     {
@@ -89,7 +89,7 @@ const mockPlans: Record<string, Plan[]> = {
       area: "420 م²",
       rooms: "5 غرف نوم، 4 حمامات",
       floors: "طابقان + قبو",
-      budget: "2,175,000 ر.س",
+      budget: "2,175,000 $",
       preview: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop"
     },
     {
@@ -98,7 +98,7 @@ const mockPlans: Record<string, Plan[]> = {
       area: "380 م²",
       rooms: "4 غرف نوم، 3 حمامات",
       floors: "طابقان",
-      budget: "1,950,000 ر.س",
+      budget: "1,950,000 $",
       preview: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop"
     },
     {
@@ -107,7 +107,7 @@ const mockPlans: Record<string, Plan[]> = {
       area: "500 م²",
       rooms: "6 غرف نوم، 5 حمامات",
       floors: "3 طوابق",
-      budget: "2,812,500 ر.س",
+      budget: "2,812,500 $",
       preview: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop"
     },
     {
@@ -116,7 +116,7 @@ const mockPlans: Record<string, Plan[]> = {
       area: "390 م²",
       rooms: "4 غرف نوم، 3 حمامات",
       floors: "طابقان",
-      budget: "2,025,000 ر.س",
+      budget: "2,025,000 $",
       preview: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop"
     },
     {
@@ -125,7 +125,7 @@ const mockPlans: Record<string, Plan[]> = {
       area: "450 م²",
       rooms: "5 غرف نوم، 4 حمامات",
       floors: "طابقان + سطح",
-      budget: "2,550,000 ر.س",
+      budget: "2,550,000 $",
       preview: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&h=600&fit=crop"
     }
   ]
@@ -171,8 +171,8 @@ export function PlansDisplay({ projectType, budget }: PlansDisplayProps) {
           {currentPlans.map((plan) => (
             <Card key={plan.id} className="overflow-hidden group hover:shadow-xl transition-all">
               <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={plan.preview} 
+                <img
+                  src={plan.preview}
                   alt={plan.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -181,7 +181,7 @@ export function PlansDisplay({ projectType, budget }: PlansDisplayProps) {
 
               <div className="p-6 space-y-4">
                 <h3 className="text-xl font-bold">{plan.title}</h3>
-                
+
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">{t('areaLabelShort')}:</span>
@@ -202,9 +202,9 @@ export function PlansDisplay({ projectType, budget }: PlansDisplayProps) {
                 </div>
 
                 <div className="flex gap-2 pt-4">
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
+                  <Button
+                    variant="outline"
+                    size="sm"
                     className="flex-1"
                     onClick={(e) => handleView3D(e, plan.id)}
                     disabled={selectedPlanId !== plan.id}
@@ -212,9 +212,9 @@ export function PlansDisplay({ projectType, budget }: PlansDisplayProps) {
                     <Eye className="w-4 h-4 mr-1" />
                     {t('view3D')}
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
+                  <Button
+                    variant="outline"
+                    size="sm"
                     className="flex-1"
                     onClick={(e) => handleDownloadPDF(e, plan.id)}
                     disabled={selectedPlanId !== plan.id}
@@ -224,11 +224,11 @@ export function PlansDisplay({ projectType, budget }: PlansDisplayProps) {
                   </Button>
                 </div>
 
-                <Button 
+                <Button
                   className={cn(
                     "w-full",
-                    selectedPlanId === plan.id 
-                      ? "bg-green-600 hover:bg-green-600/90" 
+                    selectedPlanId === plan.id
+                      ? "bg-green-600 hover:bg-green-600/90"
                       : "bg-primary hover:bg-primary/90"
                   )}
                   onClick={(e) => handleSelectPlan(e, plan.id, plan.title)}

@@ -15,7 +15,7 @@ if (!fs.existsSync(uploadsDir)) {
     fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
-app.post('/api/generate-plans',
+app.post('/api/v1/generate-plans',
     upload.single('file'),
     validateRequest,
     (req, res) => {
@@ -49,8 +49,8 @@ app.use((err, req, res, next) => {
     });
 });
 
-const port = 3000;
+const port = process.env.PORT || 3001;
 
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${port}`);
 });
