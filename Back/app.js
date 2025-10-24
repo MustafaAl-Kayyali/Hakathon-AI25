@@ -24,12 +24,13 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage,
   fileFilter,
-  limits: { fileSize: 10 * 1024 * 1024 },
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
 });
 
 const validateRequest = (req, res, next) => {
   const { projectType, budget, floors, area, areaUnit } = req.body;
   const errors = [];
+
   if (!projectType) errors.push("Project type is required");
   if (!budget || isNaN(budget) || budget <= 0)
     errors.push("Valid budget is required");
