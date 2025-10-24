@@ -13,7 +13,6 @@ interface LanguageContextType {
   language: Language;
   toggleLanguage: () => void;
   t: (key: TranslationKey, fallback?: string) => string;
-  isRTL: boolean;
 }
 
 const translations: Record<Language, TranslationKeys> = {
@@ -139,27 +138,22 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>('en');
-  const [isRTL, setIsRTL] = useState(false);
 
   // Load language from localStorage on initial render
   useEffect(() => {
     const savedLanguage = localStorage.getItem('preferredLanguage') as Language | null;
     if (savedLanguage && ['en', 'ar'].includes(savedLanguage)) {
       setLanguage(savedLanguage);
-      setIsRTL(savedLanguage === 'ar');
     } else if (navigator.language.startsWith('ar')) {
       setLanguage('ar');
-      setIsRTL(true);
     }
   }, []);
 
   const toggleLanguage = () => {
     const newLang = language === 'en' ? 'ar' : 'en';
     setLanguage(newLang);
-    setIsRTL(newLang === 'ar');
     localStorage.setItem('preferredLanguage', newLang);
     document.documentElement.lang = newLang;
-    document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
   };
 
   const t = (key: TranslationKey, fallback: string = ''): string => {
@@ -176,17 +170,18 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Set initial HTML attributes
+  // Set initial HTML language attribute
   useEffect(() => {
     document.documentElement.lang = language;
-    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-  }, [language, isRTL]);
+    // Force LTR direction for all languages
+    document.documentElement.dir = 'ltr';
+  }, [language]);
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, t, isRTL }}>
+    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
       <div
-        dir={isRTL ? 'rtl' : 'ltr'}
-        className={`${isRTL ? 'font-arabic' : ''} ${language}-content`}
+        dir="ltr"
+        className={`${language === 'ar' ? 'font-arabic' : ''} ${language}-content`}
       >
         {children}
       </div>

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Building2, Globe } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
+import { ThemeToggle } from "./theme-toggle";
 
 export function Header() {
   const { language, toggleLanguage } = useLanguage();
@@ -17,15 +18,18 @@ export function Header() {
           </span>
         </div>
 
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={toggleLanguage}
-          className="gap-2"
-        >
-          <Globe className="w-4 h-4" />
-          {language === 'en' ? 'العربية' : 'English'}
-        </Button>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={toggleLanguage}
+            className="gap-2"
+          >
+            <Globe className="w-4 h-4" />
+            {language === 'en' ? 'العربية' : 'English'}
+          </Button>
+        </div>
       </div>
     </header>
   );
